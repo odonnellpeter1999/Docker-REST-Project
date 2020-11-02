@@ -1,0 +1,45 @@
+version: '3'
+
+networks:
+    microservices:
+        driver: bridge
+
+services:
+    auldfellas:
+        build: auldfellas
+        networks:
+            - microservices
+        ports: 
+            - 8081:8081
+       
+
+    girlpower:
+        build: girlpower
+        networks:
+            - microservices
+        ports: 
+            - 8082:8082
+
+    dodgydrivers:
+        build: dodgydrivers
+        networks:
+            - microservices
+        ports: 
+            - 8083:8083
+       
+    broker:
+        build: broker
+        networks:
+            - microservices
+        ports: 
+            - 8080:8080
+        depends_on:
+            - girlpower
+            - dodgydrivers
+            - auldfellas
+
+
+        
+
+
+        
